@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 // import heroImage from "@assets/hero-image.jpeg";
 import backgroundImage from "@assets/generated_images/Professional_cityscape_hero_background_256f795d.png";
@@ -59,6 +59,14 @@ export default function Hero() {
                   "/pic9.jpeg"
                 ];
                 const [current, setCurrent] = useState(0);
+                // Auto-scroll effect
+                useEffect(() => {
+                  const interval = setInterval(() => {
+                    setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+                  }, 3500); // 3.5 seconds per image
+                  return () => clearInterval(interval);
+                }, [images.length]);
+
                 const prevImage = (e: React.MouseEvent<HTMLButtonElement>) => {
                   e.stopPropagation();
                   setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));

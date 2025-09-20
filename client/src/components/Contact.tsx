@@ -61,7 +61,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-muted/30 scroll-mt-16">
+  <section id="contact" className="pt-8 pb-20 bg-muted/30 scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4" data-testid="text-contact-title">
@@ -71,6 +71,16 @@ export default function Contact() {
             Ready to get started? Contact us today for expert assistance with all your 
             documentation and licensing needs. We're here to help!
           </p>
+          <div className="mt-6">
+            <a
+              href="tel:+919075824143"
+              className="bg-primary text-white px-6 py-2 rounded-lg shadow hover:bg-primary/90 inline-block text-base font-semibold focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200"
+              aria-label="Call Now"
+              style={{ textDecoration: 'none' }}
+            >
+              Call Now
+            </a>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
@@ -214,24 +224,28 @@ export default function Contact() {
                   We're always ready to help with your service needs.
                 </p>
                 <div className="grid grid-cols-2 gap-3">
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    onClick={() => console.log("Calling main branch")}
+                  <a
+                    href="tel:+919075824143"
+                    className="inline-flex items-center justify-center border border-primary text-primary bg-white hover:bg-primary hover:text-white px-4 py-2 rounded-lg shadow transition-colors duration-200 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    aria-label="Call Now"
+                    style={{ textDecoration: 'none' }}
                     data-testid="button-call-main"
                   >
                     <Phone className="h-4 w-4 mr-2" />
                     Call Now
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    onClick={() => console.log("WhatsApp clicked")}
+                  </a>
+                  <a
+                    href="https://wa.me/919075824143?text=Hello%2C%20I%20need%20assistance%20from%20Mauli%20Online%20Center."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center border border-green-500 text-green-700 bg-white hover:bg-green-500 hover:text-white px-4 py-2 rounded-lg shadow transition-colors duration-200 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                    aria-label="WhatsApp"
+                    style={{ textDecoration: 'none' }}
                     data-testid="button-whatsapp"
                   >
                     <Mail className="h-4 w-4 mr-2" />
                     WhatsApp
-                  </Button>
+                  </a>
                 </div>
               </CardContent>
             </Card>

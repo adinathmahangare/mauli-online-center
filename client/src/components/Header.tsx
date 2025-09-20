@@ -14,15 +14,15 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <header className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="flex items-center justify-between h-16 w-full max-w-full">
           <div className="flex items-center">
             <img
               src="/logo.jpeg"
               alt="Mauli Logo"
-              className="h-8 w-8 sm:h-10 sm:w-10 mr-2 object-contain select-none"
-              style={{ maxWidth: '2.5rem', maxHeight: '2.5rem' }}
+              className="h-12 w-12 sm:h-16 sm:w-16 mr-2 object-contain select-none"
+              style={{ maxWidth: '4rem', maxHeight: '4rem' }}
             />
             <h1 className="text-lg sm:text-xl font-bold text-primary whitespace-nowrap" data-testid="text-logo">
               Mauli Online Center
@@ -68,21 +68,30 @@ export default function Header() {
             </div>
             <Button 
               onClick={() => scrollToSection('contact')}
-              className="hover-elevate"
+              className="hover-elevate hidden md:inline-flex"
               data-testid="button-quote"
             >
               Get Quote
             </Button>
             
-            {/* Mobile menu button */}
+            {/* Mobile call button and menu button */}
+            <a
+              href="tel:+919075824143"
+              className="md:hidden flex-shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-white mr-2 hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Call Now"
+              style={{ textDecoration: 'none' }}
+              data-testid="button-mobile-call"
+            >
+              <Phone className="h-5 w-5" />
+            </a>
             <Button
               variant="outline"
               size="icon"
-              className="md:hidden"
+              className="md:hidden flex-shrink-0 w-10 h-10 rounded-lg bg-gray-200 hover:bg-gray-300 text-foreground"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               data-testid="button-mobile-menu"
             >
-              {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>

@@ -81,7 +81,7 @@ export default function CustomerReviews() {
   const averageRating = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
 
   return (
-    <section id="reviews" className="py-20 bg-background scroll-mt-16">
+    <section id="reviews" className="pt-8 pb-20 bg-background scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4" data-testid="text-reviews-title">
