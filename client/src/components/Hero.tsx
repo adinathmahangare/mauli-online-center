@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 // import heroImage from "@assets/hero-image.jpeg";
 import backgroundImage from "@assets/generated_images/Professional_cityscape_hero_background_256f795d.png";
@@ -42,12 +43,64 @@ export default function Hero() {
           </div>
 
           <div className="relative">
-            <div className="relative bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-4">
-              <img 
-                src="/hero-image.jpeg" 
-                alt="Professional multi-services office interior" 
-                className="w-full h-auto rounded-xl shadow-lg"
-              />
+            <div className="relative bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-4 flex items-center justify-center">
+              {/* Image Carousel */}
+              {(() => {
+                const images = [
+                  "/hero-image.jpeg",
+                  "/pic1.jpeg",
+                  "/pic2.jpeg",
+                  "/pic3.jpeg",
+                  "/pic4.jpeg",
+                  "/pic5.jpeg",
+                  "/pic6.jpeg",
+                  "/pic7.jpeg",
+                  "/pic8.jpeg",
+                  "/pic9.jpeg"
+                ];
+                const [current, setCurrent] = useState(0);
+                const prevImage = (e: React.MouseEvent<HTMLButtonElement>) => {
+                  e.stopPropagation();
+                  setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+                };
+                const nextImage = (e: React.MouseEvent<HTMLButtonElement>) => {
+                  e.stopPropagation();
+                  setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+                };
+                return (
+                  <div className="relative w-full flex items-center justify-center">
+                    <button
+                      onClick={prevImage}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/80 rounded-full p-2 shadow hover:bg-primary/20 z-10"
+                      aria-label="Previous image"
+                    >
+                      <span className="text-2xl">&#8592;</span>
+                    </button>
+                    <img
+                      src={images[current]}
+                      alt={`Hero ${current + 1}`}
+                      className="w-full h-auto rounded-xl shadow-lg max-h-96 object-contain"
+                      style={{ maxWidth: '400px' }}
+                    />
+                    <button
+                      onClick={nextImage}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/80 rounded-full p-2 shadow hover:bg-primary/20 z-10"
+                      aria-label="Next image"
+                    >
+                      <span className="text-2xl">&#8594;</span>
+                    </button>
+                    {/* Dots */}
+                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2">
+                      {images.map((_, idx) => (
+                        <span
+                          key={idx}
+                          className={`w-2 h-2 rounded-full ${idx === current ? 'bg-primary' : 'bg-muted-foreground/30'}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()}
               <div className="absolute top-8 right-8 bg-background/90 backdrop-blur-sm rounded-lg p-3 shadow-lg">
                 <div className="flex items-center text-sm font-medium">
                   <div className="w-2 h-2 bg-chart-2 rounded-full mr-2"></div>
