@@ -5,9 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
+import { Phone, Mail, Clock, Send } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
   const { toast } = useToast();
@@ -18,39 +17,44 @@ export default function Contact() {
     service: "",
     message: ""
   });
-
-  const contactMutation = useMutation({
-    mutationFn: async (data: typeof formData) => {
-      const response = await apiRequest("POST", "/api/contact", data);
-      return response.json();
-    },
-    onSuccess: (data) => {
-      toast({
-        title: "Message Sent Successfully!",
-        description: "We'll contact you within 12 hours to discuss your requirements.",
-      });
-      
-      // Reset form
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-        service: "",
-        message: ""
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        title: "Error Sending Message",
-        description: error.message || "Failed to send message. Please try again or call us directly.",
-        variant: "destructive",
-      });
-    },
-  });
+  const [isSending, setIsSending] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    contactMutation.mutate(formData);
+    setIsSending(true);
+
+    emailjs
+      .send(
+        "service_z2aqvka",   // 🔹 Replace with your EmailJS Service ID
+        "template_h50wqvj",  // 🔹 Replace with your EmailJS Template ID
+        formData,
+        "gHcR6DsMZkzBKywsn"    // 🔹 Replace with your EmailJS Public Key
+      )
+      .then(() => {
+        toast({
+          title: "Message Sent Successfully!",
+          description: "We'll contact you within 24 hours to discuss your requirements.",
+        });
+
+        // Reset form
+        setFormData({
+          name: "",
+          phone: "",
+          email: "",
+          service: "",
+          message: ""
+        });
+      })
+      .catch((error) => {
+        toast({
+          title: "Error Sending Message",
+          description: error.text || "Failed to send message. Please try again or call us directly.",
+          variant: "destructive",
+        });
+      })
+      .finally(() => {
+        setIsSending(false);
+      });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -61,7 +65,7 @@ export default function Contact() {
   };
 
   return (
-  <section id="contact" className="pt-8 pb-20 bg-muted/30 scroll-mt-16">
+    <section id="contact" className="pt-8 pb-20 bg-muted/30 scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4" data-testid="text-contact-title">
@@ -76,7 +80,7 @@ export default function Contact() {
               href="tel:+919075824143"
               className="bg-primary text-white px-6 py-2 rounded-lg shadow hover:bg-primary/90 inline-block text-base font-semibold focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200"
               aria-label="Call Now"
-              style={{ textDecoration: 'none' }}
+              style={{ textDecoration: "none" }}
             >
               Call Now
             </a>
@@ -164,11 +168,11 @@ export default function Contact() {
                 <Button 
                   type="submit" 
                   className="w-full" 
-                  disabled={contactMutation.isPending}
+                  disabled={isSending}
                   data-testid="button-submit"
                 >
                   <Send className="h-4 w-4 mr-2" />
-                  {contactMutation.isPending ? "Sending..." : "Send Message"}
+                  {isSending ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </CardContent>
@@ -228,7 +232,7 @@ export default function Contact() {
                     href="tel:+919075824143"
                     className="inline-flex items-center justify-center border border-primary text-primary bg-white hover:bg-primary hover:text-white px-4 py-2 rounded-lg shadow transition-colors duration-200 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                     aria-label="Call Now"
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: "none" }}
                     data-testid="button-call-main"
                   >
                     <Phone className="h-4 w-4 mr-2" />
@@ -240,7 +244,7 @@ export default function Contact() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center border border-green-500 text-green-700 bg-white hover:bg-green-500 hover:text-white px-4 py-2 rounded-lg shadow transition-colors duration-200 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                     aria-label="WhatsApp"
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: "none" }}
                     data-testid="button-whatsapp"
                   >
                     <Mail className="h-4 w-4 mr-2" />
