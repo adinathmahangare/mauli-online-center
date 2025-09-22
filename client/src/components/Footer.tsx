@@ -74,7 +74,7 @@ export default function Footer() {
               <div className="space-y-2">
                 <div className="flex items-center text-muted-foreground">
                   <Phone className="h-4 w-4 mr-2 text-chart-2 flex-shrink-0" />
-                  <span data-testid="text-footer-phones">+91 9876543210 / 211</span>
+                  <span data-testid="text-footer-phones">+91 9075814143</span>
                 </div>
                 <div className="flex items-center text-muted-foreground">
                   <Clock className="h-4 w-4 mr-2 text-chart-2 flex-shrink-0" />

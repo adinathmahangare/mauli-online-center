@@ -47,16 +47,13 @@ export default function Hero() {
               {/* Image Carousel */}
               {(() => {
                 const images = [
-                  "/hero-image.jpeg",
+                  "/pic8.jpeg",
                   "/pic1.jpeg",
                   "/pic2.jpeg",
-                  "/pic3.jpeg",
-                  "/pic4.jpeg",
-                  "/pic5.jpeg",
                   "/pic6.jpeg",
                   "/pic7.jpeg",
-                  "/pic8.jpeg",
-                  "/pic9.jpeg"
+                  "/pic3.jpeg",
+                 
                 ];
                 const [current, setCurrent] = useState(0);
                 // Auto-scroll effect

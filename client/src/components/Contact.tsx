@@ -27,7 +27,7 @@ export default function Contact() {
     onSuccess: (data) => {
       toast({
         title: "Message Sent Successfully!",
-        description: "We'll contact you within 24 hours to discuss your requirements.",
+        description: "We'll contact you within 12 hours to discuss your requirements.",
       });
       
       // Reset form

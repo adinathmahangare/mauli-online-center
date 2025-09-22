@@ -5,7 +5,7 @@ const services = [
   {
     icon: Printer,
     title: "Xerox & Stationery",
-    description: "Printing, binding, and stationery solutions for all your document needs.",
+    
     features: [
       "Black & White Printing",
       "Color Printing",
@@ -29,7 +29,6 @@ const services = [
   {
     icon: FileText,
     title: "Online Form Filling",
-    description: "Assistance with government, scholarship, and job application forms.",
     features: [
       "Government Forms",
       "Online Form Filling (Scholarship, Exams, Govt. Schemes)",
@@ -48,7 +47,6 @@ const services = [
   {
     icon: GraduationCap,
     title: "Admission Forms",
-    description: "College, university, and entrance exam application forms support.",
     features: [
       "College Admission Forms Applications",
       "University Forms",
@@ -69,7 +67,6 @@ const services = [
   {
     icon: Award,
     title: "License Forms",
-    description: "Business, trade, and compliance licenses with full documentation support.",
     features: [
       "FSSAI License (Food License)",
       "Trade License",
