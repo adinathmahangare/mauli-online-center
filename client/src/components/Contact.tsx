@@ -8,6 +8,11 @@ import { useToast } from "@/hooks/use-toast";
 import { Phone, Mail, Clock, Send } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
+// Get env variables at build time
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
 export default function Contact() {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -21,21 +26,31 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate env variables before sending
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      toast({
+        title: "Configuration Error",
+        description: "Email service is not configured properly.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSending(true);
 
     emailjs.send(
-  "service_cuz7wg6",   // hardcoded
-  "template_jbfq5ol",  // hardcoded
-  {
-    name: formData.name,
-    phone: formData.phone,
-    email: formData.email,
-    service: formData.service,
-    message: formData.message,
-  },
-  "gHcR6DsMZkzBKywsn"  // hardcoded public key
-)
-
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      {
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        service: formData.service,
+        message: formData.message,
+      },
+      EMAILJS_PUBLIC_KEY
+    )
       .then(() => {
         toast({
           title: "Message Sent Successfully!",
